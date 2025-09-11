@@ -40,7 +40,6 @@ export class Users implements OnInit {
   filteredUsers: UserModel[] = [...this.allUsers];
   searchValue: string = '';
   selectedUsers: UserModel[] = [];
-  loading: boolean = true;
 
   constructor(
     private readonly usersService: UsersService,
@@ -58,17 +57,14 @@ export class Users implements OnInit {
   // METODOS PARA OBTENER INFORMACION
   //== == == == == == == == == == == == == == == == == == == == == == == == == == ==
   getAllUsers(): void {
-    this.loading = true;
     this.loader.show();
     this.usersService.getAllUsers().subscribe({
       next: (resp) => {
         this.loader.hide();
         this.allUsers = resp.data;
-        this.loading = false;
       },
       error: (err) => {
         this.loader.hide();
-        this.loading = false;
         this.alert.show('Error fetching users', 'error');
         console.error(err);
       },
