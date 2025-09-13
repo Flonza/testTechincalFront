@@ -223,10 +223,19 @@ export class UpdateUsers implements OnInit {
       },
       error: (err) => {
         this.loader.hide();
+        let detail: string;
+
+        if (err.error.message) {
+          detail = err.error.message;
+        } else if (this.isEditing) {
+          detail = 'Failed to update user';
+        } else {
+          detail = 'Failed to create user';
+        }
         this.messageService.add({
           severity: 'error',
           summary: 'Error',
-          detail: this.isEditing ? 'Failed to update user' : 'Failed to create user',
+          detail: detail,
         });
         console.error(err);
       },

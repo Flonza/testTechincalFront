@@ -105,8 +105,8 @@ export class Users implements OnInit {
     if (!users || users.length === 0) {
       this.messageService.add({
         severity: 'warn',
-        summary: 'Advertencia',
-        detail: 'Debes seleccionar al menos un usuario',
+        summary: 'Warning',
+        detail: 'You must select at least one user to delete.',
       });
       return;
     }
